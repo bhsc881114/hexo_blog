@@ -69,3 +69,35 @@ theme: next
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type:
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+
+duoshuo_shortname: bhsc881114
+google_analytics: bhsc881114
+
+# Social links
+social:
+  github: https://github.com/bhsc881114
+  twitter: https://twitter.com/bhsc881114
+  weibo: http://www.weibo.com/u/1747810310
+  zhihu: http://www.zhihu.com/people/chen-tao-97-49
+
+sitemap:
+    path: sitemap.xml
+
+baidusitemap:
+    path: baidusitemap.xml
+
+# Posts displayed per page in list
+api_posts_per_page: 10
+
+node_sass:
+  outputStyle: nested
+  precision: 8
+  imagePath: images
+  sourceComments: none
+
+scheme: Mist
