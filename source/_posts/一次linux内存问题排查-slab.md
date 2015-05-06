@@ -11,7 +11,7 @@ photos:
 - http://7xijc0.com1.z0.glb.clouddn.com/xxxx.png
 ---
 
-一次内存告警的排查过程，怎么计算linux内存使用情况
+一次内存告警的排查过程，linux内存占用分析
 <!--more-->
 
 # 问题
