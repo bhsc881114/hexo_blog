@@ -32,14 +32,14 @@ visuall viewport,显示的屏幕窗口,可以把他理解为放大镜,距离可�
 比如一个1024px宽的页面，要在320px的手机上显示，可以拉远距离(缩放)全局浏览，也可以拉近只看一部分,并且移动visual viewport来查看网页的不同部分
 
 ## layout viewport
-另外一个PC端的网页是怎么在320px的手机上渲染的？这里有个隐藏的概念,就是layout viewport。当我们设置一个width=20%时,他必须知道父级的width是多少,最终必须找到一个设置绝对值的顶层的元素(body)
+PC的网页怎么在320px的手机上渲染？这里有个隐藏的概念,就是layout viewport。当我们设置一个width=20%时,他必须知道父级的width是多少,最终必须找到一个设置绝对值的顶层的元素(body)
 
 早期没有专门为移动端做的页面,所以手机浏览器默认的layout viewport都是接近pc的宽度，这样可以确保PC的网页展示都没问题。[这里](http://www.quirksmode.org/mobile/metaviewport/)里有每个手机浏览器的默认layot viewport，附个图：
 
 ![layout](http://7xijc0.com1.z0.glb.clouddn.com/viewport-4.png)
 
 ## 修改layout viewport
-layout viewport+visual viewport，我们的PC端网页已经可以在手机上展示了，不过显然还不够完美：能不能不要缩放，不要双击放大以后再拖动来看网页? 手机端320px的宽度，那就做个宽度只有320px的页面：
+layout viewport+visual viewport，PC端网页已经可以在手机上展示了，不过显然还不够完美：**能不能不要缩放，不要双击放大以后再拖动来看网页?** 假设手机宽度是320px，那就做个宽度只有320px的页面：
 {% codeblock %}
 <html>
   <body style="width:320px">
