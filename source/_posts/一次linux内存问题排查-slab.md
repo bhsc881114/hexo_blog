@@ -1,10 +1,9 @@
 title: "一次linux内存问题排查-slab"
 date: 2015-04-19 08:08:47
 categories: 
-- slab
-- pagecache
+- linux内存
 tags: 
-- linux
+- slab
 - 内存
 - pagecache
 photos:

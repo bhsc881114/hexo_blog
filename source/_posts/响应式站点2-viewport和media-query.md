@@ -2,8 +2,8 @@ title: "响应式站点2-viewport和media-query"
 date: 2015-05-22 08:58:34
 categories: 
 - 前端
-- 响应式
 tags:
+- 响应式
 - viewport 
 - media-query
 ---
