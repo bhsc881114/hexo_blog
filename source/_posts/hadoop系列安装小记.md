@@ -556,3 +556,4 @@ hive shell日志在/tmp/admin/hive.log，之前有个配置错误引起的异常
 # 参考
 * [Platform base: HDFS + MR](http://hadooper.blogspot.jp/2010/11/platform-base-hdfs-mr.html)
 * [hive搭建&测试](http://blog.fens.me/hadoop-hive-intro/)
+* [从Hadoop到Spark的架构实践](http://www.csdn.net/article/2015-06-08/2824889?utm_source=tuicool)
