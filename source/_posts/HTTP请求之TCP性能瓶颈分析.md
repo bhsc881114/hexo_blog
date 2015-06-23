@@ -1,4 +1,4 @@
-title: "HTTP请求中的TCP性能瓶颈分析"
+title: "HTTP请求之TCP瓶颈分析"
 date: 2015-06-23 19:38:43
 categories: 
 - HTTP性能
