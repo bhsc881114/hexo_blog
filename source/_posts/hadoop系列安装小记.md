@@ -1,6 +1,6 @@
 title: "hadoop系列安装小记"
 date: 2015-06-18 23:41:26
-categories: 
+categories:
 - hadoop
 tags:
 - hadoop安装
@@ -29,27 +29,27 @@ tags:
 * 下载rpm:
 wget http://archive.cloudera.com/cdh5/one-click-install/redhat/5/x86_64/cloudera-cdh-5-0.x86_64.rpm
 * 安装rpm，会加一个clouder的yum源： sudo yum --nogpgcheck localinstall cloudera-cdh-5-0.x86_64.rpm  
-* 清下yum缓存: yum clean all 、 yum makecache 
-* 导入GPG验证的key：sudo rpm --import http://archive.cloudera.com/cdh5/redhat/5/x86_64/cdh/RPM-GPG-KEY-cloudera 
+* 清下yum缓存: yum clean all 、 yum makecache
+* 导入GPG验证的key：sudo rpm --import http://archive.cloudera.com/cdh5/redhat/5/x86_64/cdh/RPM-GPG-KEY-cloudera
 * 可能的问题:
 
 ```
 1.运行yum的可能遇到错误:
-It's possible that the above module doesn't match the current version of Python, which is:2.7.3 (default, May 19 
+It's possible that the above module doesn't match the current version of Python, which is:2.7.3 (default, May 19
 2014, 15:04:50) [GCC 4.1.2 20080704 (Red Hat 4.1.2-46)]
 
-需要修改yum的python依赖版本： 
+需要修改yum的python依赖版本：
 修改文件： vim /usr/bin/yum
 修改头#!/usr/bin/python  => #!/usr/bin/python2.4
 
-2.找不到host命令，需要装下bind-utils：yum install bind-utils 
+2.找不到host命令，需要装下bind-utils：yum install bind-utils
 ```
 
 ## 安装jdk
 ```
 yum -y install unzip
 curl -L -s get.jenv.io | bash
-source /home/admin/.jenv/bin/jenv-init.sh 
+source /home/admin/.jenv/bin/jenv-init.sh
 jenv install java 1.7.0_45
 ```
 
@@ -82,15 +82,15 @@ sudo yum install hadoop-yarn-nodemanager hadoop-hdfs-datanode hadoop-mapreduce
 
 ```
 sudo cp -r /etc/hadoop/conf.empty /etc/hadoop/conf.my_cluster
-sudo /usr/sbin/alternatives --install /etc/hadoop/conf hadoop-conf /etc/hadoop/conf.my_cluster 50 
+sudo /usr/sbin/alternatives --install /etc/hadoop/conf hadoop-conf /etc/hadoop/conf.my_cluster 50
 sudo /usr/sbin/alternatives --set hadoop-conf /etc/hadoop/conf.my_cluster
 sudo chmod -R 777 /etc/hadoop/conf.my_cluster
 （alternatives --config java好像无效）
 
 创建数据目录（用户组hdfs:hdfs 权限700）:
 datanode：sudo mkdir -p /data/hadoop/hdfs/dn
-sudo chown -R hdfs:hdfs /data/hadoop 
- 
+sudo chown -R hdfs:hdfs /data/hadoop
+
 ```
 
 **hadoop-env.sh**
@@ -120,7 +120,7 @@ export HADOOP_DATANODE_OPTS="$HADOOP_DATANODE_OPTS -Xmx2048m -verbose:gc -Xloggc
  <property>
   <name>io.compression.codecs</name>
  <value>org.apache.hadoop.io.compress.DefaultCodec,org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.BZip2Codec,org.apache.hadoop.io.compress.SnappyCodec</value>
-</property> 
+</property>
 ```
 
 **配置hdfs-site.xml**
@@ -139,7 +139,7 @@ export HADOOP_DATANODE_OPTS="$HADOOP_DATANODE_OPTS -Xmx2048m -verbose:gc -Xloggc
   <property>
     <name>dfs.namenode.name.dir</name>
     <value>/data/hadoop/hdfs/nn</value>
-  </property>    
+  </property>
   <property>
      <name>dfs.datanode.data.dir</name>
      <value>/data/hadoop/hdfs/dn</value>
@@ -177,15 +177,15 @@ hdfs运行以后，推荐在hdfs上创建tmp目录，并设置权限：
 $ sudo -u hdfs hadoop fs -mkdir /tmp
 $ sudo -u hdfs hadoop fs -chmod -R 1777 /tmp
 ```
- 
+
 ## 测试
 
-http://localhost:50070/dfshealth.html#tab-overview 
+http://localhost:50070/dfshealth.html#tab-overview
 
 简单的测试只要执行下hadoop fs命令即可，如果要测试读写性能，要等mapreduce装好
 ```
 【写性能测试】
-hadoop jar /usr/lib/hadoop-0.20-mapreduce/hadoop-test.jar  TestDFSIO -write -nrFiles 10 -fileSize 1000 
+hadoop jar /usr/lib/hadoop-0.20-mapreduce/hadoop-test.jar  TestDFSIO -write -nrFiles 10 -fileSize 1000
 我们集群的一次测试结果：
 ----- TestDFSIO ----- : write
            Date & time: Sun Jul 13 21:40:41 CST 2014
@@ -216,7 +216,7 @@ hadoop jar /usr/lib/hadoop-0.20-mapreduce/hadoop-test.jar  TestDFSIO -read -nrFi
 测试结果以后需要清理测试结果
 hadoop jar /usr/lib/hadoop-0.20-mapreduce/hadoop-test.jar  TestDFSIO -clean
 ```
-> 
+>
 在windows看客户端下测试Hdfs，需要到
 https://github.com/srccodes/hadoop-common-2.2.0-bin 下载并替换hadoopHome下的bin目录
 
@@ -226,7 +226,7 @@ https://github.com/srccodes/hadoop-common-2.2.0-bin 下载并替换hadoopHome下
 ## 安装和配置
 ```
 sudo yum install hadoop-yarn-resourcemanager
-sudo yum install hadoop-mapreduce-historyserver hadoop-yarn-proxyserver 
+sudo yum install hadoop-mapreduce-historyserver hadoop-yarn-proxyserver
 sudo mkdir -p /data/yarn/local
 sudo mkdir -p /data/yarn/logs
 sudo chown -R yarn:yarn /data/yarn
@@ -315,7 +315,7 @@ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar randomwriter 
                 HDFS: Number of read operations=80
                 HDFS: Number of large read operations=0
                 HDFS: Number of write operations=40
-        Job Counters 
+        Job Counters
                 Killed map tasks=10
                 Launched map tasks=30
                 Other local map tasks=30
@@ -339,9 +339,9 @@ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar randomwriter 
         org.apache.hadoop.examples.RandomWriter$Counters
                 BYTES_WRITTEN=21475013178
                 RECORDS_WRITTEN=2043801
-        File Input Format Counters 
+        File Input Format Counters
                 Bytes Read=0
-        File Output Format Counters 
+        File Output Format Counters
                 Bytes Written=21545727074
 The job took 604 seconds.
 ```
@@ -356,7 +356,7 @@ sudo yum install zookeeper-server
 **拷贝配置**
 ```
 sudo cp -r /etc/zookeeper/conf.dist /etc/zookeeper/conf.my_cluster
-sudo alternatives --verbose --install /etc/zookeeper/conf zookeeper-conf /etc/zookeeper/conf.my_cluster 50 
+sudo alternatives --verbose --install /etc/zookeeper/conf zookeeper-conf /etc/zookeeper/conf.my_cluster 50
 sudo alternatives --set zookeeper-conf /etc/zookeeper/conf.my_cluster
 ```
 
@@ -377,13 +377,13 @@ chown -R zookeeper:zookeeper /data/zookeeper
 ```
 启动日志在/var/log/zookeeper
 在A运行 :
-$ service zookeeper-server init --myid=1 
+$ service zookeeper-server init --myid=1
 $ service zookeeper-server start
-在B运行 
-$ service zookeeper-server init --myid=2 
+在B运行
+$ service zookeeper-server init --myid=2
 $ service zookeeper-server start
-在C运行 
-$ service zookeeper-server init --myid=3 
+在C运行
+$ service zookeeper-server init --myid=3
 $ service zookeeper-server start
 ```
 
@@ -409,7 +409,7 @@ DataNode： sudo yum install hbase-regionserver
 **拷贝自己的配置文件**
 ```
 sudo cp -r /etc/hbase/conf.dist /etc/hbase/conf.my_cluster
-sudo alternatives --verbose --install /etc/hbase/conf hbase-conf /etc/hbase/conf.my_cluster 50 
+sudo alternatives --verbose --install /etc/hbase/conf hbase-conf /etc/hbase/conf.my_cluster 50
 sudo alternatives --set hbase-conf /etc/hbase/conf.my_cluster
 ```
 **修改最大文件数限制**
