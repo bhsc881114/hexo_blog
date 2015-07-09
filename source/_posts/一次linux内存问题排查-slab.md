@@ -1,8 +1,8 @@
 title: "一次linux内存问题排查-slab"
 date: 2015-04-19 08:08:47
-categories: 
+categories:
 - linux内存
-tags: 
+tags:
 - slab
 - 内存
 - pagecache
@@ -20,7 +20,7 @@ photos:
 已经使用有7G，进程实际占用的物理内存是RES，目测实际应该只占了3G不到，数据对不上，什么鬼
 
 # 内存占用分析
-搜到了霸业的文章，[Linux Used内存到底哪里去了](http://blog.yufeng.info/archives/2456)，收获了很多，分享下
+主要参考了[Linux Used内存到底哪里去了](http://blog.yufeng.info/archives/2456)，收获挺大，分享下
 
 ## nmon、slabtop等工具
 先装了nmon，他能够比较直观的现实内存占用情况:
@@ -33,19 +33,19 @@ photos:
 ## 分析slab占用情况
 把slab占用比较大的打出来,
 {% codeblock %}
- cat /proc/slabinfo |awk '{if($3*$4/1024/1024 > 100){print $1,$3*$4/1024/1024} }' 
+ cat /proc/slabinfo |awk '{if($3*$4/1024/1024 > 100){print $1,$3*$4/1024/1024} }'
 
   ext3_inode_cache 282.575
   proc_inode_cache 2154.03
   dentry_cache 868.075
 {% endcodeblock %}
 
-**发现proc_inode这个占了2G多，当然dentry也不小，proc文件系统的文件是挺多，但是这么多肯定不正常**
+**发现proc_inode这个占了2G多，当然dentry也不小，proc的文件是挺多，但是这么多肯定不正常**
 
 ---
 
-# 解决,释放缓存
-不知道为啥proc会占这么大，怀疑是阿里云的问题（只是怀疑，最后没查到原因就好了），如果想主动释放缓存缓存：
+# 释放缓存
+不知道为啥proc会占这么大，怀疑是阿里云的问题（只是怀疑，最后没查到原因就好了），如果想主动释放inoed可以用下面的方法：
 
 To free pagecache:
 * echo 1 > /proc/sys/vm/drop_caches
@@ -55,13 +55,13 @@ To free pagecache, dentries and inodes:
 * echo 3 > /proc/sys/vm/drop_caches
 
 # 内存使用计算
-linux的内存管理挺复杂，其实牵涉到内存的都挺复杂，比如java gc大家都想更好、更快、更简单的利用内存。
-linux中有进程的内存管理、伙伴分配算法、slab、page table、MNU，page cache等等，每一项都值得展开，这里先只关心怎么计算内存使用，
-霸爷给出的内存占用计算方式挺靠谱：slab+page table+res
+linux中有进程的内存管理、伙伴分配算法、slab、page table、MNU，page cache等等，每一项都值得展开，这里先只
+关心怎么计算内存使用，霸爷给出的计算方式挺靠谱：slab+page table+res
 
 ## slab
 个人解就是一个内存池，因为一个page太大了放一些小对象不经济，所以就搞了个对象池，用于分配这些小对象，可以看下
-[slab、slub、slob](http://stackoverflow.com/questions/15470560/what-to-choose-between-slab-and-slub-allocator-in-linux-kernel)，
+[slab、slub、slob](http://stackoverflow.com/questions/15470560/what-to-choose-between-slab-and-slub-allocator-in-linux-kernel)
+
 slub更适应现代高性能服务器大量进程的情况，代码也更简单
 
 ## RES
@@ -73,7 +73,5 @@ linux的内存分page来管理（一般是4K），所有有个page table做描�
 ![img](http://7xijc0.com1.z0.glb.clouddn.com/page-table.png)
 
 ## buffer、cache
-buffer和cache是已经使用的内存，但是其实是可以释放的。page cahe，他和文件系统关系比较大，后续分享rocketmq时再细讲吧
-
-
-距上一篇博客快一月了,憋了好久，哎，执行力太差
+buffer和cache是已经使用的内存，但是其实是可以释放的。page cahe，他和文件系统关系比较大，后续分享rocketmq时
+再细讲吧
