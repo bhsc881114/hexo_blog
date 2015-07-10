@@ -65,13 +65,12 @@ ios最早提供了[修改layout viewport](https://developer.apple.com/library/io
 {% endcodeblock %} width和initial-scale 设置其他值的效果，可以在这里查看：[understanding-viewport](http://andreasbovens.github.io/understanding-viewpor)
 
 ## 小结
-
-设置恰当的viewport，并且设置body的宽度为100%，这样在不同的设备上就能100%的展示，没有缩放，这为我们的响应式设计提供了基础
+设置layout viewport为设备宽度，并且visual viewport不缩放，这样就能实现最好的效果，为我们的响应式设计提供了基础
 
 ---
 
 # media query 
-为不同的设备设置了网页的布局总宽度之后，需要进行区分，以便为不同的宽度设置不同的布局，media query提供了这种能力，它有非常多的属性，不过我们最常用的就是width
+为不同的设备设置了网页的布局总宽度之后，需要进行区分，以便为不同的宽度设置不同的布局，mediaquery提供了这种能力，它有非常多的属性，不过我们最常用的就是width
 {% codeblock %}
 	@media (max-width: 480px) { 
 	    // 隐藏某些元素

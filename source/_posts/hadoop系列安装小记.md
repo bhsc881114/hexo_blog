@@ -26,14 +26,15 @@ tags:
 
 ## 配置yum源
 
-* 下载rpm:
+```
 wget http://archive.cloudera.com/cdh5/one-click-install/redhat/5/x86_64/cloudera-cdh-5-0.x86_64.rpm
-* 安装rpm，会加一个clouder的yum源： sudo yum --nogpgcheck localinstall cloudera-cdh-5-0.x86_64.rpm  
-* 清下yum缓存: yum clean all 、 yum makecache
-* 导入GPG验证的key：sudo rpm --import http://archive.cloudera.com/cdh5/redhat/5/x86_64/cdh/RPM-GPG-KEY-cloudera
-* 可能的问题:
+sudo yum --nogpgcheck localinstall cloudera-cdh-5-0.x86_64.rpm   #安装rpm，会加一个clouder的yum源：
+yum clean all 、 yum makecache # 重新构建yum缓存
+sudo rpm --import http://archive.cloudera.com/cdh5/redhat/5/x86_64/cdh/RPM-GPG-KEY-cloudera #导入GPG验证的key
+```
 
 ```
+* 可能的问题:
 1.运行yum的可能遇到错误:
 It's possible that the above module doesn't match the current version of Python, which is:2.7.3 (default, May 19
 2014, 15:04:50) [GCC 4.1.2 20080704 (Red Hat 4.1.2-46)]
