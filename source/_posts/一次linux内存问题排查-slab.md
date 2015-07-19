@@ -55,23 +55,18 @@ To free pagecache, dentries and inodes:
 * echo 3 > /proc/sys/vm/drop_caches
 
 # 内存使用计算
-linux中有进程的内存管理、伙伴分配算法、slab、page table、MNU，page cache等等，每一项都值得展开，这里先只
-关心怎么计算内存使用，霸爷给出的计算方式挺靠谱：slab+page table+res
+内存相关的有有进程的内存管理、伙伴分配算法、slab、page table、MNU，page cache等等，每一项都值得展开，这里先只看怎么计算内存使用，霸爷给出的计算方式挺靠谱：slab+page table+res
 
 ## slab
-个人解就是一个内存池，因为一个page太大了放一些小对象不经济，所以就搞了个对象池，用于分配这些小对象，可以看下
-[slab、slub、slob](http://stackoverflow.com/questions/15470560/what-to-choose-between-slab-and-slub-allocator-in-linux-kernel)
-
-slub更适应现代高性能服务器大量进程的情况，代码也更简单
+slab 个人解就是一个内存池，因为一个page太大了放一些小对象不经济，所以就搞了个对象池，用于分配这些小对象，可以参考
+[slab、slub、slob](http://stackoverflow.com/questions/15470560/what-to-choose-between-slab-and-slub-allocator-in-linux-kernel)，另外还有slub更适应现代高性能服务器大量进程的情况，代码也更简单
 
 ## RES
-进程实际占用的内存（resident resident set size），man top给出的算法是 RES = CODE + DATA.
-实际中我发现很多进程对不上，whatever，暂时还不知道靠谱的计算方法
+RES指进程实际占用的内存（resident resident set size），man top给出的算法是 RES = CODE + DATA.实际中我发现很多进程对不上，whatever
 
 ## page table
 linux的内存分page来管理（一般是4K），所有有个page table做描述信息也很好理解
 ![img](http://7xijc0.com1.z0.glb.clouddn.com/page-table.png)
 
 ## buffer、cache
-buffer和cache是已经使用的内存，但是其实是可以释放的。page cahe，他和文件系统关系比较大，后续分享rocketmq时
-再细讲吧
+buffer和cache是已经使用的内存，可以释放。page cache，他和文件系统关系比较大，后续分享rocketmq时再细讲吧
