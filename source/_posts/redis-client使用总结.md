@@ -9,7 +9,7 @@ tags:
 <!--more-->
 
 ## 客户端配置
-连接池实现是基于Apache Commons Pool 2，配置也参考的GenericObjectPoolConfig，分别是minIdle,maxIdle,maxTotal,其中maxTotal包含了活跃和非活跃的连接总数
+java端的redis client使用的是jedis，他的连接池实现是基于Apache Commons Pool 2，配置也参考的GenericObjectPoolConfig，分别是minIdle,maxIdle,maxTotal,其中maxTotal包含了活跃和非活跃的连接总数
 
 > maximum total connections (maxTotal) includes both active and idle connections.maximum idle connections (maxIdle) are connections that are ready to be used (but are currently unused).
 
