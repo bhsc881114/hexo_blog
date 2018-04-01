@@ -8,7 +8,7 @@ subtitle:
 description: 学习总结 思考感悟
 author: chentao
 email: bhsc.happy@gmail.com
-language: zh-cn
+language: zh-Hans
 timezone:
 
 # URL
@@ -75,7 +75,11 @@ feed:
   path: atom.xml
   limit: 20
 
-duoshuo_shortname: bhsc881114
+disqus:
+  enable: true
+  shortname: bhsc881114
+  count: true
+
 google_analytics: UA-61553578-1
 
 # Social links
@@ -100,4 +104,9 @@ node_sass:
   imagePath: images
   sourceComments: none
 
-scheme: Mist
+scheme: Pisces
+
+# reward
+reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
+wechatpay: http://7xijc0.com1.z0.glb.clouddn.com/wx_qr.png
+alipay: http://7xijc0.com1.z0.glb.clouddn.com/alipay_qr.png
