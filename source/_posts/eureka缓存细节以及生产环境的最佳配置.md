@@ -41,7 +41,7 @@ Eureka Client缓存的定期更新周期，他由eureka.client.registryFetchInte
 如果你采用Ribbon来访问服务，那么这里会有个缓存（他的数据来源是本地Eureka Client缓存），他由ribbon. ServerListRefreshInterval控制，默认30秒， 改成2秒
 
 #### 怎么更快的踢掉没有心跳的机器
-eureka.instance.leaseExpirationDurationInSeconds，这个值用来控制多久踢掉机器，默认是3个心跳周期，有点久，可以考虑改成2个，他不会影响到保护模式（如果开启自我保护模式，心跳间隔以为上面的bug不能改，只能改这个了 -_-）
+eureka.instance.leaseExpirationDurationInSeconds，这个值用来控制多久踢掉机器，默认是3个心跳周期，有点久，可以考虑改成2个，他不会影响到保护模式（如果开启自我保护模式，心跳间隔因为上面的bug不能改，只能改这个了 -_-）
 
 ----------
 

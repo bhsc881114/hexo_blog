@@ -53,3 +53,4 @@ tcp_keepalive_intvl    default 75 seconds
 1.[redis报-ERR max number of clients reached错误](http://coolnull.com/2842.html)
 2.[Custom Configuration of TCP Socket Keep-Alive Timeouts](http://coryklein.com/tcp/2015/11/25/custom-configuration-of-tcp-socket-keep-alive-timeouts.html)
 3.[Redis Clients Handling](https://redis.io/topics/clients)
+4.[Sentinel最大连接数](https://gnuhpc.gitbooks.io/redis-all-about/HAClusterArchPractice/ms/sentinel-maxconn.html)

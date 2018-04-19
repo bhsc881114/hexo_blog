@@ -75,11 +75,7 @@ feed:
   path: atom.xml
   limit: 20
 
-disqus:
-  enable: true
-  shortname: bhsc881114
-  count: true
-
+livere_uid: MTAyMC8zNTM3OC8xMTkxNA==
 google_analytics: UA-61553578-1
 
 # Social links
@@ -105,6 +101,16 @@ node_sass:
   sourceComments: none
 
 scheme: Pisces
+
+leancloud_visitors:
+  enable: true
+  app_id: IY894of8DFbN2piIauloXfl4-gzGzoHsz
+  app_key: tXs5Hd6WRLRd3eT9XB68gNlQ
+
+# wechat_subscriber:
+#  enabled: true
+#  qcode: http://7xijc0.com1.z0.glb.clouddn.com/wx_gongzho.png
+#  description: 欢迎您扫一扫上面的微信公众号，订阅我的博客！
 
 # reward
 reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
